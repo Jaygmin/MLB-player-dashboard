@@ -79,9 +79,12 @@ export default function Component() {
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <CardTitle className="text-xl">2025 시즌 주요 선수 기록</CardTitle>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <span>2025 시즌 기록</span>
+              <span className="hidden sm:inline">2025 시즌 기록</span>
               {isClient && lastUpdated && (
-                <span>• 마지막 업데이트: {formatDate(lastUpdated)}</span>
+                <span>
+                  <span className="hidden sm:inline">•</span> 마지막 업데이트:{" "}
+                  {formatDate(lastUpdated)}
+                </span>
               )}
             </div>
           </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import Header from "@/components/header";
-import { Card, CardHeader, CardTitle } from "./components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "./components/ui/card";
 import { useState, useEffect } from "react";
 import { ArrowUpDown, Search } from "lucide-react";
 import { Input } from "./components/ui/input";
@@ -16,6 +16,8 @@ import {
 import { Player } from "./lib/types/player-interface";
 import { mockPlayers } from "./constants/mock/mockPlayer";
 import { sortOptions } from "./constants/sortOptions";
+import { PlayerStatsTable } from "./components/player-stats-table";
+import { getTeamColor } from "./constants/getTeamColor";
 
 export default function Component() {
   const [players, setPlayers] = useState<Player[]>(mockPlayers);
@@ -34,6 +36,13 @@ export default function Component() {
   const uniquePositions = Array.from(
     new Set(players.filter((p) => p.role === "야수").map((p) => p.position))
   );
+
+  const filteredPlayers = players
+    .filter((p) => p.role === "야수")
+    .filter(
+      (p) => selectedPosition === "ALL" || p.position === selectedPosition
+    )
+    .filter((p) => p.name.toLowerCase().includes(searchTerm.toLowerCase()));
 
   const handleSort = (sortType: string) => {
     setSortBy(sortType);
@@ -142,6 +151,15 @@ export default function Component() {
             </DropdownMenu>
           </div>
         </CardHeader>
+        <CardContent>
+          <div className="overflow-x-auto">
+            <PlayerStatsTable
+              players={filteredPlayers}
+              sortBy={sortBy}
+              getTeamColor={getTeamColor}
+            />
+          </div>
+        </CardContent>
       </Card>
     </div>
   );

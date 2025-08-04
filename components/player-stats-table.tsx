@@ -11,7 +11,6 @@ import { Badge } from "./ui/badge";
 
 export function PlayerStatsTable({
   players,
-  sortBy,
   getTeamColor,
 }: PlayerStatsTableProps) {
   return (

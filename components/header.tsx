@@ -4,12 +4,22 @@ import { RefreshCw, TrendingUp } from "lucide-react";
 import { Button } from "./ui/button";
 import { useState } from "react";
 
-export default function Component() {
+interface HeaderProps {
+  onRefresh?: () => void;
+}
+
+export default function Component({ onRefresh }: HeaderProps) {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleRefresh = () => {
     setIsLoading(true);
 
+    // 실제 업데이트 로직 실행
+    if (onRefresh) {
+      onRefresh();
+    }
+
+    // 로딩 상태를 1초간 유지
     setTimeout(() => {
       setIsLoading(false);
     }, 1000);

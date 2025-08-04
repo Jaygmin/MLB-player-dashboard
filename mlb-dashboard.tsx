@@ -33,6 +33,12 @@ export default function Component() {
     setLastUpdated(new Date().toISOString());
   }, []);
 
+  const handleRefresh = () => {
+    setLastUpdated(new Date().toISOString());
+
+    console.log("최신 기록 조회 완료:", new Date().toLocaleString("ko-KR"));
+  };
+
   const uniquePositions = Array.from(
     new Set(players.filter((p) => p.role === "야수").map((p) => p.position))
   );
@@ -61,7 +67,6 @@ export default function Component() {
     setPlayers(sortedPlayers);
   };
 
-  // 날짜 포맷팅 함수
   const formatDate = (dateString: string) => {
     if (!isClient) return "";
     try {
@@ -73,7 +78,7 @@ export default function Component() {
 
   return (
     <div className="container mx-auto p-6 space-y-6">
-      <Header />
+      <Header onRefresh={handleRefresh} />
       <Card>
         <CardHeader>
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">

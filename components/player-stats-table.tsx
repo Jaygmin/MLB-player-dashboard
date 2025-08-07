@@ -8,6 +8,7 @@ import {
   TableRow,
 } from "./ui/table";
 import { Badge } from "./ui/badge";
+import { getTeamAbbreviation } from "@/constants/getTeamColor";
 
 export function PlayerStatsTable({
   players,
@@ -46,7 +47,7 @@ export function PlayerStatsTable({
               </TableCell>
               <TableCell>
                 <Badge className={`${getTeamColor(player.team)} text-white`}>
-                  {player.team}
+                  {getTeamAbbreviation(player.team)}
                 </Badge>
               </TableCell>
               <TableCell>{player.position}</TableCell>

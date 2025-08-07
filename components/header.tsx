@@ -2,27 +2,17 @@
 
 import { RefreshCw, TrendingUp } from "lucide-react";
 import { Button } from "./ui/button";
-import { useState } from "react";
 
 interface HeaderProps {
   onRefresh?: () => void;
+  loading?: boolean;
 }
 
-export default function Component({ onRefresh }: HeaderProps) {
-  const [isLoading, setIsLoading] = useState(false);
-
+export default function Component({ onRefresh, loading = false }: HeaderProps) {
   const handleRefresh = () => {
-    setIsLoading(true);
-
-    // 실제 업데이트 로직 실행
     if (onRefresh) {
       onRefresh();
     }
-
-    // 로딩 상태를 1초간 유지
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
   };
 
   return (
@@ -33,10 +23,11 @@ export default function Component({ onRefresh }: HeaderProps) {
       </div>
       <Button
         onClick={handleRefresh}
+        disabled={loading}
         className="flex items-center gap-2 cursor-pointer"
       >
-        <RefreshCw className={`h-4 w-4 ${isLoading ? "animate-spin" : ""}`} />
-        {isLoading ? "업데이트 중..." : "최신 기록 조회"}
+        <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} />
+        {loading ? "업데이트 중..." : "최신 기록 조회"}
       </Button>
     </div>
   );

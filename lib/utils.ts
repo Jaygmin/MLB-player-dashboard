@@ -41,7 +41,7 @@ export const getMaxStat = (
   players: Player[],
   statKey: keyof Player["stats"],
   defaultValue: string | number = 0
-): { value: string | number; playerName: string } => {
+): { value: string | number; playerName: string; player?: Player } => {
   if (players.length === 0) {
     return { value: defaultValue, playerName: "데이터 없음" };
   }
@@ -62,6 +62,7 @@ export const getMaxStat = (
   return {
     value: typeof defaultValue === "string" ? maxValue.toFixed(3) : maxValue,
     playerName: maxPlayer?.name || "데이터 없음",
+    player: maxPlayer,
   };
 };
 

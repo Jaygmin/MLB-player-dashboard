@@ -1,6 +1,7 @@
 export interface Player {
   name: string;
   team: string;
+  teamId: number | null;
   position: string;
   role: "투수" | "야수";
   stats: {

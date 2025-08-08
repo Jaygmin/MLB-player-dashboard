@@ -32,6 +32,7 @@ export function SearchFilters({
   players,
 }: SearchFiltersProps) {
   const uniquePositions = getUniquePositions(players);
+  const currentSortOption = sortOptions.find((opt) => opt.value === sortBy);
 
   return (
     <div className="flex flex-col sm:flex-row gap-4 mt-4">
@@ -76,7 +77,7 @@ export function SearchFilters({
             className="flex items-center gap-2 bg-transparent"
           >
             <ArrowUpDown className="h-4 w-4" />
-            정렬: {sortOptions.find((opt) => opt.value === sortBy)?.label}
+            정렬: {currentSortOption?.label || "OPS"}
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-48">

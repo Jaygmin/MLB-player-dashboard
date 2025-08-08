@@ -68,9 +68,11 @@ export const getMaxStat = (
 
 // 날짜 포맷팅 함수
 export const formatDate = (dateString: string, isClient: boolean): string => {
-  if (!isClient) return "";
+  if (!isClient || !dateString) return "";
   try {
-    return new Date(dateString).toLocaleString("ko-KR");
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) return "";
+    return date.toLocaleString("ko-KR");
   } catch {
     return "";
   }

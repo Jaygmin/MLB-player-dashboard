@@ -9,7 +9,7 @@ export function usePlayers() {
   const [selectedPosition, setSelectedPosition] = useState("ALL");
   const [isClient, setIsClient] = useState(false);
   const [lastUpdated, setLastUpdated] = useState<string>("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true); // 초기값을 true로 변경
   const [error, setError] = useState<string | null>(null);
 
   // 선수 데이터 가져오기
